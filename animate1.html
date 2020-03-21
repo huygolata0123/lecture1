@@ -1,0 +1,77 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>My Web Page</title>
+	<style>
+		@keyframe hide{
+			from {
+				opacoty: 1;
+			}
+			to {
+				opacity: 0;
+			}
+		}
+		
+		.hide{
+			float: right;
+		}
+		
+		.post {
+			background-color: #77d11;
+			padding: 20px;
+			margin-bottom: 10px;
+			animation-name: hide;
+			animation-duration: 3s;
+			animatiom-fill-mode: forwards;
+			animation-play-state:paused;
+		}
+		
+		body {
+			padding-bottom: 50px;
+		}
+	</style>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	
+	<script id="post" type="text/x-handlebars-template">
+		<div class="post">
+			{ raw -%}
+				{{ contents }}
+			{%- endraw %} 
+			<button class="hide">Hide</button>
+		</div>
+	</script>
+	
+	<script>
+	
+		// Start with first post
+		let counter = 1;
+		
+		// Load posts 20 at a time
+		const quanity = 20;
+		
+		// When DOM loads, render the first 20 posts
+		document.addEventListener('DOMContentLoads', loads)
+		
+		// If scrolled to bottom, load the next 20 posts
+		window.onscroll = ()=> {
+			if (window.innerHeight + window.scrolly >= document.body.of)
+				load();
+			}
+		};
+		
+		// If hide button is clicked,delete the post
+		document.addEventListener('click',event => {
+			const element = event.target;
+			if (element.className === 'hide') {
+				element.parentElement.addEventListener('animationed', ()=> {
+					element.parentElement.remove();
+				});
+			}
+		});
+				
+</head>
+<body>
+	<h1>Welcome!</h1>
+</body>
+</html>
